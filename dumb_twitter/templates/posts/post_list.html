@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form action="/posts/new" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Post">
+  </form>
+  <div class="posts-container">
+    {% for post in posts %}
+      <div class="post-container">
+        <p class="post-content">{{ post.content }}</p>
+        <p class="post-meta">@{{ post.user }} on {{ post.creation_time }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
