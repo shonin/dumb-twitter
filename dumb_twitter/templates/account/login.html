@@ -34,9 +34,26 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
+<div class="card mbm" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Want to be the admin?</h5>
+    <p class="card-text">
+      Username: <code>admin</code><br/>
+      Password: <code>password</code>
+    </p>
+  </div>
+</div>
+
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form|crispy }}
+  <div class="form-group">
+    <div id="div_id_test_password" class="form-check">
+      <input type="checkbox" name="test_password" class="checkboxinput form-check-input" id="id_test_password">
+      <label for="id_test_password" class="form-check-label">
+      Test if password is compromised
+    </label></div>
+  </div>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}

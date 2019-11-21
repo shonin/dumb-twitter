@@ -17,6 +17,14 @@ $pink: #f2dede;
 $dark-pink: #eed3d7;
 $red: #b94a48;
 
+// Spacing
+
+$spacing-extra-small: 4px;
+$spacing-small: 8px;
+$spacing-medium: 16px;
+$spacing-large: 24px;
+$spacing-extra-large: 32px;
+
 ////////////////////////////////
 		//Alerts//
 ////////////////////////////////
@@ -41,6 +49,75 @@ $red: #b94a48;
 ///////////////////
 
 
-.post-container {
+.posts-container {
   width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
+
+.post-container {
+  width: 50%;
+  border: darkgrey 1px solid;
+  border-radius: 2em;
+  padding: 2em;
+  margin: 0.5em;
+}
+
+// SPACING
+// p,m = padding,margin
+// a,t,r,b,l,h,v = all,top,right,bottom,left,horizontal,vertical
+// xs,s,m,l,xl,n = extra-small(4px),small(8px),medium(16px),large(24px),extra-large(32px),none(0px)
+//
+// Generated Spacing Classes
+// (p/m)(a/t/r/b/l/h/v)(xs/s/m/l/xl/n)
+//
+// Examples:
+// .phn == padding horizontal none
+// .mtl == margin top large
+
+$spacing-style: (padding, margin);
+$spacing-side: (all, top, right, bottom, left, horizontal, vertical);
+
+/// Sets the key and the corresponding spacing amount for the generated spacing classes
+///
+/// @type Map
+$spacing-sizes: (
+  n: 0 !important,
+  xs: $spacing-extra-small !important,
+  s: $spacing-small !important,
+  m: $spacing-medium !important,
+  l: $spacing-large !important,
+  xl: $spacing-extra-large !important
+) !default;
+
+/// Generates the spacing classes
+@each $style in $spacing-style {
+  @each $side in $spacing-side {
+    @each $size, $value in $spacing-sizes {
+      $spacing-class: str-slice($style, 1, 1) + str-slice($side, 1, 1) + $size;
+
+      .#{$spacing-class} {
+        @if $side == vertical {
+          #{$style}-top: $value;
+          #{$style}-bottom: $value;
+        }
+
+        @else if $side == horizontal {
+          #{$style}-left: $value;
+          #{$style}-right: $value;
+        }
+
+        @else if $side == all {
+          #{$style}: $value;
+        }
+
+        @else {
+          #{$style}-#{$side}: $value;
+        }
+      }
+    }
+  }
+}
+
+

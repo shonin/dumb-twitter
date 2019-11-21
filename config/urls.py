@@ -16,7 +16,7 @@ urlpatterns = [
     path("users/", include("dumb_twitter.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("posts/", include("dumb_twitter.posts.urls", namespace="posts"))
+    path("", include("dumb_twitter.posts.urls", namespace="posts"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

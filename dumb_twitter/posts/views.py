@@ -8,6 +8,7 @@ def home_page(request):
     context = {
         "posts": Post.objects.all().order_by("-creation_time"),
         "form": PostForm()
+
     }
 
     return render(request, "posts/post_list.html", context=context)
