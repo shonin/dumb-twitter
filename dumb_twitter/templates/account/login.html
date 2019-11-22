@@ -34,17 +34,27 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
-<div class="card mbm" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Want to be the admin?</h5>
-    <p class="card-text">
-      Username: <code>admin</code><br/>
-      Password: <code>password</code>
-    </p>
+<div class="flex">
+  <div class="card mam" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Want to be the admin?</h5>
+      <p class="card-text">
+        Username: <code>admin</code><br/>
+        Password: <code>password</code>
+      </p>
+    </div>
+  </div>
+  <div class="hidden card mam" id="password_card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Checking password...</h5>
+      <p class="card-text">
+
+      </p>
+    </div>
   </div>
 </div>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login" id="login_form" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form|crispy }}
   <div class="form-group">
@@ -60,6 +70,9 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
 </form>
+
+
+
 
 {% endblock %}
 
