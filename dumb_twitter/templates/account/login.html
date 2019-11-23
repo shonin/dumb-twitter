@@ -35,7 +35,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% endif %}
 
 <div class="flex">
-  <div class="card mam" style="width: 18rem;">
+  <div class="card mas" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Want to be the admin?</h5>
       <p class="card-text">
@@ -44,7 +44,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
       </p>
     </div>
   </div>
-  <div class="hidden card mam" id="password_card" style="width: 18rem;">
+  <div class="hidden card mas" id="password_card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Checking password...</h5>
       <p class="card-text">
@@ -61,7 +61,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
     <div id="div_id_test_password" class="form-check">
       <input type="checkbox" name="test_password" class="checkboxinput form-check-input" id="id_test_password">
       <label for="id_test_password" class="form-check-label">
-      Test if password is compromised
+      Test if password is compromised (<a href="#" id="compromised_modal" data-toggle="modal" data-target="#exampleModal">What is this?</a>)
     </label></div>
   </div>
   {% if redirect_field_value %}
@@ -71,7 +71,37 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
 </form>
 
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Testing if your password is compromised</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <strong>What is this?</strong> Over the years, millions of passwords have been hacked and put online for anyone
+        to see and, if they are a bad actor, use in attempts to hack accounts. If one of your passwords has been leaked
+        in one of those hacks, you should consider that password no longer safe to use. This tool checks your password
+        against a large database of compromised passwords to see if your password has ever leaked online.
+        <br/>
+        <br/>
+        <strong>Is this safe?</strong> In short, yes. When your password is tested a mathmatical property called
+        k-anonymity is used. Your password gets converted  into a SHA-1 hash, and then only the first 5 digits of
+        the hash are sent over the internet. A response from the server comes back with every compromised password that
+        starts with those 5 digits. Then, from the safety of your own computer a check is performed to see if your
+        password was compromised. To learn more about this,
+        <a href="https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity"
+           target="_blank">click here</a>.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}
