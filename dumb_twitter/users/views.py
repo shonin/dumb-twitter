@@ -5,6 +5,7 @@ from django.views.generic import DetailView, RedirectView, UpdateView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
+
 User = get_user_model()
 
 
