@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load permission_tags %}
 
 {% block content %}
   {% if request.user.is_authenticated %}
@@ -13,7 +14,15 @@
       <div class="post-container">
         <p class="post-content">{{ post.content }}</p>
         <p class="post-meta">@{{ post.user }} on {{ post.creation_time }}</p>
-        <p><a href="#">Edit</a> - <a href="#">Delete</a></p>
+        <p>
+          {% if user|can:'edit_any_post' or user.id is post.user_id %}<a href="#">Edit</a>{% endif %}
+          {% if user|can:'delete_any_post' or user.id is post.user_id %}
+            <form action="{% url 'posts:delete_post' object_id=post.id %}" method="post">
+              {% csrf_token %}
+              <input class="btn btn-link" type="submit" value="delete">
+            </form>
+          {% endif %}
+        </p>
       </div>
     {% endfor %}
   </div>

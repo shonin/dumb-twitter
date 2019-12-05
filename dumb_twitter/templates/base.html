@@ -1,4 +1,5 @@
-{% load static i18n %}<!DOCTYPE html>
+{% load static i18n %}
+{% load permission_tags %}<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -44,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'posts:home' %}">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'posts:home' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -58,6 +59,9 @@
                 {# URL provided by django-allauth/account/urls.py #}
                 <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
               </li>
+              {% if user|can:'see_admin_area' %}<li class="nav-item">
+                <a class="nav-link" href="#">Admin Area</a>
+              </li>{% endif %}
             {% else %}
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
