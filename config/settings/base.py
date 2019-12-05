@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "rest_framework",
+    "rolepermissions",
 ]
 
 LOCAL_APPS = [
@@ -266,3 +267,4 @@ SOCIALACCOUNT_ADAPTER = "dumb_twitter.users.adapters.SocialAccountAdapter"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+ROLEPERMISSIONS_MODULE = 'config.settings.roles'
