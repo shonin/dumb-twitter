@@ -47,13 +47,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form|crispy }}
-  <div class="form-group">
-    <div id="div_id_test_password" class="form-check">
-      <input type="checkbox" name="test_password" class="checkboxinput form-check-input" id="id_test_password">
-      <label for="id_test_password" class="form-check-label">
-      Test if password is compromised
-    </label></div>
-  </div>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
